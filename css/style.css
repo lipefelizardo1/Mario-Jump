@@ -7,10 +7,9 @@
 .game-board {
     width: 100%;
     height: 950px;   
-    border-bottom: 20px linear-gradient(to bottom, #4caf50 50%, #8b4513 50%);
     position: relative;
     overflow: hidden;
-    background: linear-gradient(#87CEEB , #E0F6FF );
+    background: linear-gradient(to top, #4caf50 20%, #8b4513 20%, #87CEEB 80%, #E0F6FF);
 }
 
 
