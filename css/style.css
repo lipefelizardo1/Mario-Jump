@@ -25,17 +25,17 @@
 
 .pipe {
     position: absolute;
-    bottom: 0;
+    bottom: 150px; /* Alinha o pipe com o topo do chão */
     width: 80px;
     animation: pipe-animation 1.5s infinite linear; 
-    
 
+    
 }
 
 .mario {
     width: 150px;
     position: absolute;
-    bottom: 0;
+    bottom: 150px; /* Alinha o Mario com o chão */
     
 }
 
@@ -51,34 +51,28 @@
 
 @keyframes pipe-animation {
     from {
-        right: -80px;
+        right: -80px; /* O pipe começa fora da tela, à esquerda */
+        bottom: 150px; /* Certifica que está no chão */
     }
 
     to {
-        right: 100%;
+         right: 100%; /* O pipe sai pelo lado direito da tela */
+        bottom: 150px; /* Mantém o pipe no chão */
     }
 }
 
 @keyframes jump {
 
     0% {
-        bottom: 0;
+        bottom: 150px; /* Ponto inicial do salto */
     }
 
-    40% {
-        bottom: 180px;
-    }
-
-    50% {
-        bottom: 180px;
-    }
-
-    60% {
-        bottom: 180px;
+ 40%, 50%, 60% {
+        bottom: 330px; /* Altura máxima do salto */
     }
 
     100% {
-        bottom: 0;
+        bottom: 150px; /* Volta para o chão */
     }
 
 }
