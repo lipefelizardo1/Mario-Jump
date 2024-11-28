@@ -33,7 +33,7 @@ const loop = setInterval(() => {
         clearInterval(loop);
 
         
-        alert(`Fim de jogo! Sua pontuação foi: ${score}`);
+        /*alert(`Fim de jogo! Sua pontuação foi: ${score}`); */
     }
 
     // Verifica se o Mario passou sobre o cano sem colisão
