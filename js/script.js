@@ -1,6 +1,4 @@
 let score = 0; // Variável para armazenar a pontuação
-let canoPontuado = false; // Variável auxiliar para rastrear se o cano foi pontuado
-
 const scoreElement = document.querySelector('.score'); // Seleciona o elemento de pontuação
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
@@ -12,6 +10,9 @@ const jump = () => {
         mario.classList.remove('jump');
     }, 500);
 };
+
+// Array para armazenar os canos já pontuados
+let scoredPipes = [];
 
 const loop = setInterval(() => {
     const pipePosition = pipe.offsetLeft; // Posição do cano
@@ -36,16 +37,17 @@ const loop = setInterval(() => {
     }
 
     // Verifica se o Mario passou sobre o cano sem colisão
-    if (pipePosition < 0 && !canoPontuado && marioPosition > 80) {
-        score++; // Incrementa a pontuação
-        scoreElement.textContent = `Pontuação: ${score}`; // Atualiza o elemento de pontuação
-        canoPontuado = true; // Marca o cano como pontuado
+    if (pipePosition > 0 && pipePosition < 120 && marioPosition > 80) {
+        if (!scoredPipes.includes(pipePosition)) {
+            score++; // Incrementa a pontuação
+            scoreElement.textContent = `Pontuação: ${score}`; // Atualiza a pontuação na tela
+            scoredPipes.push(pipePosition); // Adiciona o cano atual à lista de canos pontuados
+        }
     }
 
-    // Reseta a variável de pontuação para o próximo cano
-    if (pipePosition < -80) {
-        canoPontuado = false;
-    }
+    // Limpa os canos que já saíram da tela para manter o array eficiente
+    scoredPipes = scoredPipes.filter((pos) => pos > pipePosition);
+
 }, 10);
 
 document.addEventListener('keydown', jump);
