@@ -11,16 +11,18 @@ const jump = () => {
     }, 500);
 }
 
+let score = 0;
+const scoreElement = document.querySelector('.score');
 
 const loop = setInterval(() => {
-
-    console.log('loop');
-
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
-    
-    console.log(marioPosition);
 
+    if (pipePosition > 0 && marioPosition >= 80) {
+        score++; // Aumenta a pontuação
+        scoreElement.textContent = `Pontuação: ${score}`; // Atualiza o texto na tela
+    }
+    
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
 
         pipe.style.animation = 'none';
@@ -36,7 +38,8 @@ const loop = setInterval(() => {
 
 
         clearInterval(loop);
-
+        
+        alert(`Fim de jogo! Sua pontuação foi: ${score}`);
     } 
 
 }, 10);
