@@ -2,6 +2,16 @@ let score = 0;
 const scoreElement = document.querySelector('.score'); 
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
+const startScreen = document.querySelector('.start-screen');
+const gameBoard = document.querySelector('.game-board');
+
+const startGame = () => {
+    startScreen.style.display = 'none'; 
+    gameBoard.style.display = 'block';  
+};
+
+document.addEventListener('keydown', startGame);
+
 
 const jump = () => {
     mario.classList.add('jump');
