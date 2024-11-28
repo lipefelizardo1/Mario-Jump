@@ -1,5 +1,5 @@
-let score = 0; // Variável para armazenar a pontuação
-const scoreElement = document.querySelector('.score'); // Seleciona o elemento de pontuação
+let score = 0; 
+const scoreElement = document.querySelector('.score'); 
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 
@@ -32,7 +32,7 @@ const loop = setInterval(() => {
 
         clearInterval(loop);
 
-        // Exibe mensagem de fim de jogo
+        
         alert(`Fim de jogo! Sua pontuação foi: ${score}`);
     }
 
