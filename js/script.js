@@ -42,10 +42,11 @@ const loop = setInterval(() => {
         alert(`Fim de jogo! Sua pontuação foi: ${score}`);
     } 
 
-     if (pipePosition < 0 && pipePosition > -80) {
-        score++; // Aumenta a pontuação
-        scoreElement.textContent = `Pontuação: ${score}`; // Atualiza a pontuação na tela
-    }
+    if (pipePosition < 0 && pipePosition > -80) {
+        if (marioPosition > 80) { 
+            score++; // Aumenta a pontuação
+            scoreElement.textContent = `Pontuação: ${score}`; 
+        }
 
 }, 10);
 
