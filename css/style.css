@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+.game-board:not(.game-started) .pipe,
+.game-board:not(.game-started) .clouds {
+    animation-play-state: paused;
+}
+
+
 
 .start-screen {
     position: absolute;

@@ -2,12 +2,18 @@ let score = 0;
 const scoreElement = document.querySelector('.score'); 
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
+const gameBoard = document.querySelector('.game-board'); 
 const startScreen = document.querySelector('.start-screen');
 const gameBoard = document.querySelector('.game-board');
 
+let gameStarted = false;
+
 const startGame = () => {
-    startScreen.style.display = 'none'; 
-    gameBoard.style.display = 'block';  
+    if (!gameStarted) {
+        gameStarted = true; // Marca que o jogo começou
+        startScreen.style.display = 'none'; // Esconde a tela inicial
+        gameBoard.classList.add('game-started'); // Ativa as animações
+    }
 };
 
 document.addEventListener('keydown', startGame);
