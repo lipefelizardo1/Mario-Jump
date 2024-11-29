@@ -1,23 +1,9 @@
 let score = 0; 
+let canoPontuado = false; 
+
 const scoreElement = document.querySelector('.score'); 
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
-const gameBoard = document.querySelector('.game-board'); 
-const startScreen = document.querySelector('.start-screen');
-const gameBoard = document.querySelector('.game-board');
-
-let gameStarted = false;
-
-const startGame = () => {
-    if (!gameStarted) {
-        gameStarted = true; // Marca que o jogo começou
-        startScreen.style.display = 'none'; // Esconde a tela inicial
-        gameBoard.classList.add('game-started'); // Ativa as animações
-    }
-};
-
-document.addEventListener('keydown', startGame);
-
 
 const jump = () => {
     mario.classList.add('jump');
@@ -27,11 +13,9 @@ const jump = () => {
     }, 500);
 };
 
-let scoredPipes = [];
-
 const loop = setInterval(() => {
     const pipePosition = pipe.offsetLeft; 
-    const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', ''); 
+    const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
         pipe.style.animation = 'none';
@@ -46,22 +30,22 @@ const loop = setInterval(() => {
 
         clearInterval(loop);
 
-        
+       
+        alert(`Fim de jogo! Sua pontuação foi: ${score}`);
     }
 
-    if (pipePosition > 0 && pipePosition < 120 && marioPosition > 80) {
-        if (!scoredPipes.includes(pipePosition)) {
-            score++; 
-            scoreElement.textContent = `Pontuação: ${score}`; 
-            scoredPipes.push(pipePosition); 
-        }
+
+    if (pipePosition < 0 && !canoPontuado && marioPosition > 80) {
+        score++; // Incrementa a pontuação
+        scoreElement.textContent = `Pontuação: ${score}`; // Atualiza o elemento de pontuação
+        canoPontuado = true; // Marca o cano como pontuado
     }
 
-    
+
     if (pipePosition < -80) {
-        scoredPipes = scoredPipes.filter(pos => pos !== pipePosition);
+        canoPontuado = false;
     }
-
 }, 10);
 
 document.addEventListener('keydown', jump);
+
