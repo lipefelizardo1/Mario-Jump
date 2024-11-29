@@ -1,22 +1,31 @@
-let score = 0; 
-let canoPontuado = false; 
-
-const scoreElement = document.querySelector('.score'); 
-const mario = document.querySelector('.mario');
+const startScreen = document.querySelector('.start-screen'); // Tela de início
+const gameBoard = document.querySelector('.game-board'); // Área do jogo
 const pipe = document.querySelector('.pipe');
+const clouds = document.querySelector('.clouds');
+const mario = document.querySelector('.mario');
 
-const jump = () => {
-    mario.classList.add('jump');
+let gameStarted = false; // Controle se o jogo começou ou não
 
-    setTimeout(() => {
-        mario.classList.remove('jump');
-    }, 500);
+// Função para iniciar o jogo
+const startGame = () => {
+    if (!gameStarted) {
+        gameStarted = true; // Marca que o jogo começou
+        startScreen.style.display = 'none'; // Esconde a tela inicial
+        gameBoard.classList.add('game-started'); // Ativa as animações
+    }
 };
 
+// Evento para iniciar o jogo
+document.addEventListener('keydown', startGame);
+
+// Movimento do Mario e lógica do jogo
 const loop = setInterval(() => {
-    const pipePosition = pipe.offsetLeft; 
+    if (!gameStarted) return; // Não faz nada enquanto o jogo não começou
+
+    const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
+    // Verifica se há colisão
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
         pipe.style.animation = 'none';
         pipe.style.left = `${pipePosition}px`;
@@ -29,23 +38,6 @@ const loop = setInterval(() => {
         mario.style.marginLeft = '50px';
 
         clearInterval(loop);
-
-       
-        alert(`Fim de jogo! Sua pontuação foi: ${score}`);
-    }
-
-
-    if (pipePosition < 0 && !canoPontuado && marioPosition > 80) {
-        score++; // Incrementa a pontuação
-        scoreElement.textContent = `Pontuação: ${score}`; // Atualiza o elemento de pontuação
-        canoPontuado = true; // Marca o cano como pontuado
-    }
-
-
-    if (pipePosition < -80) {
-        canoPontuado = false;
+        alert('Fim de jogo!');
     }
 }, 10);
-
-document.addEventListener('keydown', jump);
-
