@@ -15,6 +15,19 @@ const startGame = () => {
     }
 };
 
+// Evento para fazer o Mario pular
+const jump = () => {
+    if (!gameStarted) return; // Ignora o pulo antes do jogo começar
+
+    if (!mario.classList.contains('jump')) {
+        mario.classList.add('jump');
+
+        setTimeout(() => {
+            mario.classList.remove('jump');
+        }, 500); // Remove a classe de pulo após 500ms (tempo do pulo)
+    }
+};
+
 // Eventos para iniciar o jogo
 document.addEventListener('keydown', startGame);
 startButton.addEventListener('click', startGame);
