@@ -3,28 +3,43 @@ const startButton = document.getElementById('start-button');
 const gameBoard = document.querySelector('.game-board');
 const pipe = document.querySelector('.pipe');
 const mario = document.querySelector('.mario');
+const scoreElement = document.querySelector('.score'); // Seleciona o elemento da pontuação
 
 let gameStarted = false;
+let score = 0; // Inicializa a pontuação
+
+// Função para atualizar a pontuação
+const updateScore = () => {
+    if (gameStarted) {
+        score += 1; // Incrementa a pontuação
+        scoreElement.textContent = `Pontuação: ${score}`; // Atualiza o texto no HTML
+    }
+};
 
 // Função para iniciar o jogo
 const startGame = () => {
     if (!gameStarted) {
         gameStarted = true;
+        score = 0; // Reseta a pontuação ao iniciar um novo jogo
+        scoreElement.textContent = `Pontuação: ${score}`;
         startScreen.classList.add('hidden'); // Esconde a tela inicial com transição
         gameBoard.classList.add('game-started'); // Ativa as animações
+
+        // Inicia o contador de pontuação
+        setInterval(updateScore, 100); // Atualiza a pontuação a cada 100ms
     }
 };
 
 // Evento para fazer o Mario pular
 const jump = () => {
-    if (!gameStarted) return; // Ignora o pulo antes do jogo começar
+    if (!gameStarted) return;
 
     if (!mario.classList.contains('jump')) {
         mario.classList.add('jump');
 
         setTimeout(() => {
             mario.classList.remove('jump');
-        }, 500); // Remove a classe de pulo após 500ms (tempo do pulo)
+        }, 500); // Remove a classe de pulo após 500ms
     }
 };
 
@@ -56,6 +71,6 @@ const loop = setInterval(() => {
         mario.style.marginLeft = '50px';
 
         clearInterval(loop);
-        alert('Fim de jogo!');
+        alert(`Fim de jogo! Sua pontuação foi: ${score}`);
     }
 }, 10);
