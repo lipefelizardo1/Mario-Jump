@@ -17,26 +17,47 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /*Fundo semitransparente */
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
     font-family: Arial, sans-serif;
-    font-size: 24px;
     text-align: center;
-    z-index: 10; /* Garante que fique acima do jogo */
+    z-index: 10;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
+
+.start-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
 
 .start-screen h1 {
     font-size: 48px;
+    margin-bottom: 20px;
 }
 
-.start-screen p {
-    font-size: 24px;
-    margin-top: 10px;
+.start-screen .highlight {
+    color: yellow;
+    font-weight: bold;
+}
+
+.start-screen button {
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    background-color: #FF4500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.start-screen button:hover {
+    background-color: #FF6347;
 }
 
 
