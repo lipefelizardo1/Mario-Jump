@@ -29,7 +29,12 @@ const jump = () => {
 };
 
 // Eventos para iniciar o jogo
-document.addEventListener('keydown', startGame);
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' || e.code === 'ArrowUp') {
+        jump();
+    }
+    if (!gameStarted) startGame();
+});
 startButton.addEventListener('click', startGame);
 
 // Lógica do jogo
