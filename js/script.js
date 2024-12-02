@@ -6,27 +6,22 @@ const mario = document.querySelector('.mario');
 const scoreElement = document.querySelector('.score'); // Seleciona o elemento da pontuação
 
 let gameStarted = false;
-let score = 0; // Inicializa a pontuação
+let score = 0; // Pontuação atual
+let highScore = 0; // Maior pontuação registrada
 
-// Função para atualizar a pontuação
+// Função para atualizar o placar
 const updateScore = () => {
-    if (gameStarted) {
-        score += 1; // Incrementa a pontuação
-        scoreElement.textContent = `Pontuação: ${score}`; // Atualiza o texto no HTML
-    }
+    scoreElement.textContent = `Pontuação: ${score} | Recorde: ${highScore}`;
 };
 
 // Função para iniciar o jogo
 const startGame = () => {
     if (!gameStarted) {
         gameStarted = true;
-        score = 0; // Reseta a pontuação ao iniciar um novo jogo
-        scoreElement.textContent = `Pontuação: ${score}`;
+        score = 0; // Reseta a pontuação
+        updateScore(); // Atualiza o placar
         startScreen.classList.add('hidden'); // Esconde a tela inicial com transição
         gameBoard.classList.add('game-started'); // Ativa as animações
-
-        // Inicia o contador de pontuação
-        setInterval(updateScore, 100); // Atualiza a pontuação a cada 100ms
     }
 };
 
@@ -59,6 +54,7 @@ const loop = setInterval(() => {
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
+    // Detecta colisão
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
         pipe.style.animation = 'none';
         pipe.style.left = `${pipePosition}px`;
@@ -72,5 +68,22 @@ const loop = setInterval(() => {
 
         clearInterval(loop);
         alert(`Fim de jogo! Sua pontuação foi: ${score}`);
+        if (score > highScore) {
+            highScore = score;
+            updateScore();
+        }
+        return;
+    }
+
+    // Incrementa a pontuação quando o Mario ultrapassa o pipe
+    if (pipePosition < 0 && !pipe.classList.contains('scored')) {
+        score++; // Incrementa pontuação
+        pipe.classList.add('scored'); // Marca o obstáculo como "pontuado"
+        updateScore(); // Atualiza o placar
+    }
+
+    // Remove a classe "scored" quando o pipe volta para a posição inicial
+    if (pipePosition < -80) {
+        pipe.classList.remove('scored');
     }
 }, 10);
