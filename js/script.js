@@ -1,31 +1,31 @@
-const startScreen = document.querySelector('.start-screen'); // Tela de início
-const gameBoard = document.querySelector('.game-board'); // Área do jogo
+const startScreen = document.querySelector('.start-screen');
+const startButton = document.getElementById('start-button');
+const gameBoard = document.querySelector('.game-board');
 const pipe = document.querySelector('.pipe');
-const clouds = document.querySelector('.clouds');
 const mario = document.querySelector('.mario');
 
-let gameStarted = false; // Controle se o jogo começou ou não
+let gameStarted = false;
 
 // Função para iniciar o jogo
 const startGame = () => {
     if (!gameStarted) {
-        gameStarted = true; // Marca que o jogo começou
-        startScreen.style.display = 'none'; // Esconde a tela inicial
+        gameStarted = true;
+        startScreen.classList.add('hidden'); // Esconde a tela inicial com transição
         gameBoard.classList.add('game-started'); // Ativa as animações
     }
 };
 
-// Evento para iniciar o jogo
+// Eventos para iniciar o jogo
 document.addEventListener('keydown', startGame);
+startButton.addEventListener('click', startGame);
 
-// Movimento do Mario e lógica do jogo
+// Lógica do jogo
 const loop = setInterval(() => {
-    if (!gameStarted) return; // Não faz nada enquanto o jogo não começou
+    if (!gameStarted) return;
 
     const pipePosition = pipe.offsetLeft;
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
 
-    // Verifica se há colisão
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
         pipe.style.animation = 'none';
         pipe.style.left = `${pipePosition}px`;
