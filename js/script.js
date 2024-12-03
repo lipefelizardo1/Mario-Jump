@@ -51,9 +51,8 @@ startButton.addEventListener('click', startGame);
 const loop = setInterval(() => {
     if (!gameStarted) return;
 
-    const pipePosition = pipe.offsetLeft;
+    const pipePosition = pipe.offsetLeft; // Posição horizontal do pipe
     const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
-
 
     // Detecta colisão
     if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
@@ -77,14 +76,14 @@ const loop = setInterval(() => {
     }
 
     // Incrementa a pontuação quando o Mario ultrapassa o pipe
-    if (pipePosition < 0 && !pipe.classList.contains('scored')) {
+    if (pipePosition < 0 && pipePosition > -100 && !pipe.classList.contains('scored')) {
         score++; // Incrementa pontuação
         updateScore(); // Atualiza o placar
         pipe.classList.add('scored'); // Marca o obstáculo como "pontuado"
     }
 
     // Remove a classe "scored" quando o pipe volta para a posição inicial
-     if (pipePosition <= -80) {
+    if (pipePosition <= -100) {
         pipe.classList.remove('scored');
     }
 }, 10);
