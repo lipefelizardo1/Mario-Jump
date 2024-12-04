@@ -67,7 +67,7 @@ const loop = setInterval(() => {
         mario.style.marginLeft = '50px';
 
         clearInterval(loop);
-        alert(`Fim de jogo! Sua pontuação foi: ${score}`);
+       // alert(`Fim de jogo! Sua pontuação foi: ${score}`);
         if (score > highScore) {
             highScore = score;
             updateScore();
