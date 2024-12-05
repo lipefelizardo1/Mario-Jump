@@ -83,7 +83,7 @@ const loop = setInterval(() => {
     }
 
     // Remove a classe "scored" quando o pipe volta para a posição inicial
-    if (pipePosition <= -100) {
-        pipe.classList.remove('scored');
-    }
+   if (pipePosition <= -120) { // Ajuste o valor para corresponder à posição inicial
+    pipe.classList.remove('scored');
+}
 }, 10);
